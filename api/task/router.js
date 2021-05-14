@@ -8,17 +8,17 @@ const messageSchema = yup.object({
     project_id: yup.number().required(),
 })
 
-const projectIDValidator = (req,res, next)=>{
+const projectIDValidator = (req, res, next) => {
     console.log(req.body.project_id)
     task.getById(req.body.project_id)
-    .then(data => {
-        if (!data) {
-            next({ status: 400, message: 'id not valid'})
-        } else {
-            next()
-        }
-    })
-    .catch(next)
+        .then(data => {
+            if (!data) {
+                next({ status: 400, message: 'id not valid' })
+            } else {
+                next()
+            }
+        })
+        .catch(next)
 
 }
 
@@ -34,11 +34,11 @@ const taskCheck = async (req, res, next) => {
 
 router.get('/', (req, res, next) => {
     task.getAll()
-    .then(data => {
-        res.status(200).json(data)
-    })
+        .then(data => {
+            res.status(200).json(data)
+        })
 })
-router.post('/',taskCheck, projectIDValidator, (req, res, next) => {
+router.post('/', taskCheck, projectIDValidator, (req, res, next) => {
     task.create(req.body)
         .then(data => {
             res.status(201).json(data)

@@ -2,16 +2,16 @@ const db = require('../../data/dbConfig')
 
 function getAll() {
     return db('tasks as t')
-    .select('p.*', 't.*')
-    .leftJoin('projects as p', 'p.project_id', 't.project_id')
-    .then(data => {
-        return data.map(moredata => {
-            return {
-                ...moredata,
-                task_completed:moredata.task_completed ? true: false
-            }
+        .select('p.*', 't.*')
+        .leftJoin('projects as p', 'p.project_id', 't.project_id')
+        .then(data => {
+            return data.map(moredata => {
+                return {
+                    ...moredata,
+                    task_completed: moredata.task_completed ? true : false
+                }
+            })
         })
-    })
 }
 
 function create(data) {
@@ -21,7 +21,7 @@ function create(data) {
             stuff => {
                 return {
                     ...stuff,
-                    task_completed: stuff.task_completed ? true: false
+                    task_completed: stuff.task_completed ? true : false
                 }
             }
         )

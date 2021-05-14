@@ -12,10 +12,10 @@ server.use('/api/resources', resource);
 server.use('/api/tasks', task)
 
 server.use((err, req, res, next) => { // eslint-disable-line
-  res.status(500).json({
-    message: err.message,
-    stack: err.stack,
-  });
+    res.status(500).json({
+        message: err.message,
+        stack: err.stack,
+    });
 });
 
 module.exports = server;
